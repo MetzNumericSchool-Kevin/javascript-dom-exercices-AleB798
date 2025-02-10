@@ -13,3 +13,10 @@ let newElement = document.createElement("p")
 newElement.textContent = 'Pour cela, il vous suffit de cliquer sur une des potions de la liste ci-dessous pour l\'acheter.'
 // On utilise la méthode appenchild() pour ajouter le nouvel élément à son parent en passant en paramètre le nouvel élément
 shopDescription.appendChild(newElement)
+
+
+// ===== Roger, enfoiré ! ===== 
+
+let nameShoptoVerify = document.querySelector('h1')
+let wordToDelete = document.querySelector('h1>span')
+nameShoptoVerify.removeChild(wordToDelete)
