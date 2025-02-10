@@ -3,6 +3,7 @@
 let nameShop = document.querySelector('h1').textContent;
 console.log(nameShop);
 
+
 // ===== Des informations manquent ! ===== 
 
 // On cible le parent qui contiendra le nouveau paragraphe
@@ -20,3 +21,12 @@ shopDescription.appendChild(newElement)
 let nameShoptoVerify = document.querySelector('h1')
 let wordToDelete = document.querySelector('h1>span')
 nameShoptoVerify.removeChild(wordToDelete)
+
+
+// ===== Archibald n'est pas là, appelons le ! ===== 
+
+let callArchi = document.querySelector('#call_archibald')
+callArchi.addEventListener('click', function() {
+    alert('J\'arrive, j\'arrive Aventurier !')
+});
+
