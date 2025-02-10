@@ -54,5 +54,38 @@ greenBtn.addEventListener('click', function() {
 });
 
 
+// ===== Aventurier, voici ma boutique ! =====
 
+const potions = [
+    {
+      nom: "Potion de soin",
+      description: "Cette potion rouge vif a une odeur de fraise des bois. Un seul gorgée et vos blessures se referment comme par magie ! Effets secondaires possibles: cheveux roses pendant 24h.",
+      prix: 10,
+    },
+    {
+      nom: "Potion de sommeil",
+      description: "Un liquide bleu nuit qui sent la lavande et les rêves. Une goutte et vous dormirez comme un bébé dragon ! Attention: ne pas utiliser si vous devez combattre un troll dans les prochaines 8 heures.",
+      prix: 50,
+    },
+  ];
+// On récupère le conteneur dans lequel sera affiché les potions
+let potionList = document.querySelector("#liste_potions")
 
+// On récupère le template
+let template = document.querySelector('#template_potion')
+
+// On itère sur le tableau contenant les potions pour ajouter un nouveau template pour chaque potion
+potions.forEach(potion => {
+    // On clone le template et true sert à indiquer qu'on clone aussi tous ses enfants (pas seulement le conteneur)
+    const potionElement = template.content.cloneNode(true);
+  
+    // On remplace les éléments dans le clone
+    potionElement.querySelector(".nom_potion").textContent = potion.nom;
+    potionElement.querySelector(".prix_potion").textContent = `${potion.prix} pièces d'or`;
+    potionElement.querySelector(".description_potion").textContent = potion.description;
+  
+    // Grâce à appenChild on ajoute et affiche la nouvelle potion dans le conteneur
+    potionList.appendChild(potionElement);
+  });
+
+  
