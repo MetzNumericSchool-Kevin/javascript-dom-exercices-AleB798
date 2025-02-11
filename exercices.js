@@ -88,4 +88,65 @@ potions.forEach(potion => {
     potionList.appendChild(potionElement);
   });
 
-  
+
+// ===== Plus de potions, nous avons besoin de plus de potions ! =====
+
+// !!! ESSAYER AUSSI AVEC : new formData(htmlFormElement) + utilise la méthode get pour récupérer la valeur d'un champ de formulaire.
+
+// On récupère le formulaire et on y rattache un event submit pour soumettre les données
+const form = document.querySelector('form')
+form.addEventListener('submit', (e)=>{
+  e.preventDefault(); // Arrête le comportement par défaut et évite notamment le rechargement de la page
+
+  // On récupère les valeurs
+  const potionName = document.querySelector('.pname').value
+  const potionDescription = document.querySelector('.pdescription').value
+  const potionPrice = document.querySelector('.pprice').value
+
+  // formData est un objet JavaScript qui permet de créer facilement un ensemble de données au format clé/valeur : utile pour envoyer des données de formulaire.
+  const formData = new FormData();
+
+  formData.append('nom', potionName)
+  formData.append('description', potionDescription)
+  formData.append('prix', potionPrice)
+
+  console.log(formData)
+
+  // Contrôle avant envoi + validation
+  if (potionName && potionDescription && potionPrice) {
+
+    // On créé la nouvelle potion
+    const addNewPotion = {
+      nom: potionName,
+      description: potionDescription,
+      prix: potionPrice
+    };
+
+    // On l'ajoute au tableaux des potions
+    potions.push(addNewPotion);
+
+    // On utilise la fonction addPotion pour ajout + affichage 
+    addPotion(addNewPotion);
+
+    // On reset le formulaire pour effacer les infos
+    form.reset()
+
+  } else {
+    alert('Veuillez vérifier que tous les champs soient bien remplis.');
+  };
+})
+
+
+/* ------------------- function de création et affichage d'une nouvelle potion ------------------- */
+function addPotion(potion) {
+  let potionList = document.querySelector("#liste_potions")
+  let template = document.querySelector('#template_potion')
+
+  const potionElement = template.content.cloneNode(true);
+
+  potionElement.querySelector(".nom_potion").textContent = potion.nom;
+  potionElement.querySelector(".prix_potion").textContent = `${potion.prix} pièces d'or`;
+  potionElement.querySelector(".description_potion").textContent = potion.description;
+
+  potionList.appendChild(potionElement);
+};
