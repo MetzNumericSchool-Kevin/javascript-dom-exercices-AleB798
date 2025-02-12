@@ -33,24 +33,32 @@ callArchi.addEventListener('click', function() {
 
 // ===== Faisons un peu de magie =====
 
+// Le bouton rouge change la couleur de fond de la première boîte en 'red'
+// Le bouton bleu change la couleur de fond des deux premières boîtes en 'blue'
+// Le bouton vert change la couleur de fond de toutes les boîtes en 'green'
+
 // On sélectionne toutes les boites ayant la classe .boite
 let box = document.querySelectorAll('.boite')
+console.log(box)
 
 // On récupère les boutons représentant les couleurs
-// ensuite on place un écouteur d'event au click qui changera le fond de la boite ciblée (grâce à son index)
 let redBtn = document.querySelector('#btn_change_red')
 redBtn.addEventListener('click', function() {
     box[0].style.backgroundColor = 'red'
 });
 
 let blueBtn = document.querySelector('#btn_change_blue')
-blueBtn.addEventListener('click', function() {
-    box[1].style.backgroundColor = 'blue'
+blueBtn.addEventListener('click', () => {
+    for (i=0; i<2; i++) {
+      box[i].style.backgroundColor = 'blue'
+    }
 });
 
 let greenBtn = document.querySelector('#btn_change_green')
-greenBtn.addEventListener('click', function() {
-    box[2].style.backgroundColor = 'green'
+greenBtn.addEventListener('click', () => {
+  box.forEach(element => {
+    element.style.backgroundColor = 'green'
+  });
 });
 
 
@@ -89,19 +97,20 @@ potions.forEach(potion => {
   });
 
 
-// ===== Plus de potions, nous avons besoin de plus de potions ! =====
+// ===== Plus de potions, nous avons besoin de plus de potions ! ===== A REVOIR
 
 // !!! ESSAYER AUSSI AVEC : new formData(htmlFormElement) + utilise la méthode get pour récupérer la valeur d'un champ de formulaire.
 
 // On récupère le formulaire et on y rattache un event submit pour soumettre les données
 const form = document.querySelector('form')
+console.log(form)
 form.addEventListener('submit', (e)=>{
   e.preventDefault(); // Arrête le comportement par défaut et évite notamment le rechargement de la page
 
   // On récupère les valeurs
-  const potionName = document.querySelector('.pname').value
-  const potionDescription = document.querySelector('.pdescription').value
-  const potionPrice = document.querySelector('.pprice').value
+  const potionName = form.querySelector('input[name="nom"]').value
+  const potionDescription = document.querySelector('input[name="description"]').value
+  const potionPrice = document.querySelector('input[name="prix"]').value
 
   // formData est un objet JavaScript qui permet de créer facilement un ensemble de données au format clé/valeur : utile pour envoyer des données de formulaire.
   const formData = new FormData();
@@ -150,3 +159,7 @@ function addPotion(potion) {
 
   potionList.appendChild(potionElement);
 };
+
+
+
+
