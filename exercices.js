@@ -97,33 +97,26 @@ potions.forEach(potion => {
   });
 
 
-// ===== Plus de potions, nous avons besoin de plus de potions ! ===== A REVOIR
-
-// !!! ESSAYER AUSSI AVEC : new formData(htmlFormElement) + utilise la méthode get pour récupérer la valeur d'un champ de formulaire.
+// ===== Plus de potions, nous avons besoin de plus de potions ! ===== 
 
 // On récupère le formulaire et on y rattache un event submit pour soumettre les données
-const form = document.querySelector('form')
-console.log(form)
-form.addEventListener('submit', (e)=>{
+const formAddPotion = document.querySelector('form')
+console.log(formAddPotion)
+formAddPotion.addEventListener('submit', (e)=>{
   e.preventDefault(); // Arrête le comportement par défaut et évite notamment le rechargement de la page
 
-  // On récupère les valeurs
-  const potionName = form.querySelector('input[name="nom"]').value
-  const potionDescription = document.querySelector('input[name="description"]').value
-  const potionPrice = document.querySelector('input[name="prix"]').value
-
   // formData est un objet JavaScript qui permet de créer facilement un ensemble de données au format clé/valeur : utile pour envoyer des données de formulaire.
-  const formData = new FormData();
-
-  formData.append('nom', potionName)
-  formData.append('description', potionDescription)
-  formData.append('prix', potionPrice)
-
+  // on passe en paramètre le formulaire ciblé
+  const formData = new FormData(formAddPotion) 
   console.log(formData)
+
+  // Récupération des valeurs d'un champ grâce à GET
+  const potionName = formData.get('nom');
+  const potionDescription = formData.get('description');
+  const potionPrice = formData.get('prix');
 
   // Contrôle avant envoi + validation
   if (potionName && potionDescription && potionPrice) {
-
     // On créé la nouvelle potion
     const addNewPotion = {
       nom: potionName,
@@ -138,12 +131,12 @@ form.addEventListener('submit', (e)=>{
     addPotion(addNewPotion);
 
     // On reset le formulaire pour effacer les infos
-    form.reset()
+    formAddPotion.reset()
 
   } else {
     alert('Veuillez vérifier que tous les champs soient bien remplis.');
   };
-})
+});
 
 
 /* ------------------- function de création et affichage d'une nouvelle potion ------------------- */
